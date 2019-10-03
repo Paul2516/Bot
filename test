@@ -1,0 +1,76 @@
+# -*- coding: utf-8 -*-
+
+'''
+import telebot
+
+bot = telebot.TeleBot('859270048:AAGqwE5dhFRZ6gsJ74i0GbHHySC5prWG-bQ')
+keyboard1 = telebot.types.ReplyKeyboardMarkup()
+keyboard1.row('Привет', 'Пока')
+
+@bot.message_handler(commands=['start'])
+def start_message(message):
+    bot.send_message(message.chat.id, 'Привет, ты написал мне /start', reply_markup=keyboard1)
+
+@bot.message_handler(content_types=['text'])
+def send_text(message):
+    if message.text.lower() == 'привет':
+        bot.send_message(message.chat.id, 'Привет, мой создатель')
+    elif message.text.lower() == 'пока':
+        bot.send_message(message.chat.id, 'Прощай, создатель')
+    elif message.text.lower() == 'я тебя люблю':
+        bot.send_sticker(message.chat.id, 'CAADAgADZgkAAnlc4gmfCor5YbYYRAI')
+
+@bot.message_handler(content_types=['sticker'])
+def sticker_id(message):
+    print(message)
+
+bot.polling()
+
+
+
+@bot.message_handler(content_types=['text'])
+def get_text_messages(message):
+    mes = message.text.lower()
+    print(mes)
+    print(mes == "привет")
+    if mes == "привет":
+keyboardChoice = telebot.types.ReplyKeyboardMarkup(True,True)
+        keyboardChoice.row('10','15','30','60')
+        bot.send_message(message.chat.id, "Так так так, кто тут у нас сутулиться?\n Я здесь чтобы помочь тебе перестать кривить спину\n Выбирай как часто я буду тебе об этом напоминать.", reply_markup=keyboardChoice)
+
+
+
+'''
+
+
+
+
+import telebot
+import schedule
+import time
+from aiogram.types import ReplyKeyboardRemove
+from aiogram.types import ReplyKeyboardMarkup 
+from aiogram.types import KeyboardButton
+from aiogram.types import InlineKeyboardMarkup 
+from aiogram.types import InlineKeyboardButton
+
+button_hi = KeyboardButton('Привет! 👋')
+
+greet_kb = ReplyKeyboardMarkup()
+greet_kb.add(button_hi)
+bot = telebot.TeleBot('859270048:AAGqwE5dhFRZ6gsJ74i0GbHHySC5prWG-bQ')
+
+
+@bot.message_handler(commands=['start'])
+def process_start_command(message):
+    bot.send_message("Привет!", reply_markup=greet_kb)
+
+@bot.message_handler(commands=['help'])
+def get_command(message):
+    bot.send_message(message.chat.id, "Обо мне")
+
+bot.polling()
+
+
+
+
